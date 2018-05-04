@@ -1,0 +1,100 @@
+<h4>Facturar <small></small></h4>
+<hr>
+<div class="container">
+  <form (ngSubmit)="guardar(forma)" #forma="ngForm" novalidate="">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputCedula">Cedula</label>
+        <input class="form-control" [ngClass]="{'is-invalid': (cedula.errors?.pattern || cedula.errors?.minlength || cedula.errors?.required) && cedula.touched }" type="text" placeholder="Cedula" name="cedula" [ngModel]="usuario.cedula" required minlength="8"
+          maxlength="10" pattern="([0-9]*)" #cedula="ngModel">
+        <div *ngIf="cedula.errors?.required" class="invalid-feedback">
+          Este campo es requerido.
+        </div>
+        <div *ngIf="cedula.errors?.pattern" class="invalid-feedback">
+          Las cedulas solo poseen numeros.
+        </div>
+        <div *ngIf="cedula.errors?.minlength" class="invalid-feedback">
+          Por lo menos {{cedula.errors.minlength.requiredLength}} caracteres.
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputNombre">Nombre</label>
+        <input class="form-control" [ngClass]="{'is-invalid': (nombre.errors?.pattern || nombre.errors?.minlength || nombre.errors?.required) && nombre.touched }" type="text" placeholder="Nombre" name="nombre" [ngModel]="usuario.nombre" required minlength="3"
+          pattern="[a-z]*" #nombre="ngModel">
+        <div class="invalid-feedback">
+          <div *ngIf="nombre.errors?.required">
+            Este campo es requerido.
+          </div>
+          <div *ngIf="nombre.errors?.pattern">
+            Los nombres solo poseen letras.
+          </div>
+          <div *ngIf="nombre.errors?.minlength">
+            Por lo menos {{nombre.errors.minlength.requiredLength}} caracteres.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputApellido">Apellido</label>
+      <input class="form-control" [ngClass]="{'is-invalid': (apellido.errors?.pattern || apellido.errors?.minlength || apellido.errors?.required) && apellido.touched }" type="text" placeholder="Apellido" [ngModel]="usuario.apellido" name="apellido" required
+        pattern="[a-z]*" minlength="3" #apellido="ngModel">
+      <div *ngIf="apellido.errors?.required" class="invalid-feedback">
+        Este campo es requerido.
+      </div>
+      <div *ngIf="apellido.errors?.pattern" class="invalid-feedback">
+        Los apellidos solo poseen letras.
+      </div>
+      <div *ngIf="apellido.errors?.minlength" class="invalid-feedback">
+        Por lo menos {{apellido.errors.minlength.requiredLength}} caracteres.
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputTel">Telefono</label>
+        <input class="form-control" [ngClass]="{'is-invalid': (telefono.errors?.pattern || telefono.errors?.minlength || telefono.errors?.required) && telefono.touched }" type="text" placeholder="Telefono" [ngModel]="usuario.telefono" name="telefono" required
+          minlength="7" maxlength="10" pattern="[0-9]*" #telefono="ngModel">
+        <div *ngIf="telefono.errors?.required" class="invalid-feedback">
+          Este campo es requerido.
+        </div>
+        <div *ngIf="telefono.errors?.pattern" class="invalid-feedback">
+          Los telefonos solo poseen numeros.
+        </div>
+
+        <div *ngIf="telefono.errors?.minlength" class="invalid-feedback">
+          Por lo menos {{telefono.errors.minlength.requiredLength}} caracteres.
+        </div>
+      </div>
+    </div>
+
+    <button [disabled]="!forma.valid" type="submit" class="btn btn-primary">Sign in</button>
+  </form>
+</div>
+
+<br><br>
+<blockquote>Please click on a row</blockquote>
+<p class="text-danger">You clicked on: <strong>{{ message }}</strong></p>
+<br />
+  <div  class="table-responsive container">
+    <table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table  table-bordered">
+
+      <thead >
+        <tr class="text-center">
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of productos">
+          <th class="align-middle text-center" scope="row">{{producto.id}}</th>
+          <td class="align-middle">{{producto.nombre}}</td>
+          <td class="align-middle text-right">{{producto.precio | currency:'$':true:'4.0-0'}}</td>
+          <td class="align-middle text-right">{{producto.cantidad}}</td>
+          <td class="align-middle"><button type="button" class="btn  btn-outline-secondary btn-block ">Agregar a pedido</button></td>
+        </tr>
+        <tr *ngIf="producto?.length == 0">
+      <td colspan="3" class="no-data-available">No hay ventas</td>
+    </tr>
+      </tbody>
+    </table>
+    <hr>
+    <button type="button" class="btn btn-outline-primary btn-block " name="button">Confirmar selecciones.</button>
+  </div>

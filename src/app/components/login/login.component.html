@@ -1,0 +1,10 @@
+<div class="jumbotron" *ngIf="!auth.isAuthenticated()">
+  <h1 class="display-3">Querido trabajador, bienvenido</h1>
+
+  <p class="lead">Para iniciar su jornada laboral, presione clic en el boton azul de login.</p>
+</div>
+<div class="jumbotron" *ngIf="auth.isAuthenticated()"> 
+  <h1 class="display-3">Trabaja con actitud positiva</h1>
+
+  <p class="lead">Acuerdate de la buena atencion al cliente.</p>
+</div>
