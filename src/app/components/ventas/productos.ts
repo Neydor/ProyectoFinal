@@ -1,4 +1,4 @@
-export const productos: any[] = [{
+export const Productos: any[] = [{
   id: "1",
   nombre: "Tela Roja",
   precio: "10000",

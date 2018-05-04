@@ -70,16 +70,16 @@
   </form>
 </div>
 
-<br><br>
-<blockquote>Please click on a row</blockquote>
-<p class="text-danger">You clicked on: <strong>{{ message }}</strong></p>
-<br />
+<br >
   <div  class="table-responsive container">
-    <table  datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table  table-bordered">
-
-      <thead >
+    <table  datatable [dtOptions]="dtOptions" class="table table-hover table-bordered">
+      <thead>
         <tr class="text-center">
-          
+          <th  class="align-middle">ID</th>
+          <th class="align-middle">Nombre</th>
+          <th class="align-middle">Precio</th>
+          <th class="align-middle">Cantidad</th>
+          <th class="align-middle">Agregar</th>
         </tr>
       </thead>
       <tbody>
@@ -90,9 +90,6 @@
           <td class="align-middle text-right">{{producto.cantidad}}</td>
           <td class="align-middle"><button type="button" class="btn  btn-outline-secondary btn-block ">Agregar a pedido</button></td>
         </tr>
-        <tr *ngIf="producto?.length == 0">
-      <td colspan="3" class="no-data-available">No hay ventas</td>
-    </tr>
       </tbody>
     </table>
     <hr>
